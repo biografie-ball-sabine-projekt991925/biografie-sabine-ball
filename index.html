@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sabine Ball – Die Mutter Teresa von Dresden</title>
+<title>Sabine Ball &ndash; Die Mutter Teresa von Dresden</title>
 <link rel="icon" type="image/png" href="sabine-ball.png">  
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -16,6 +16,8 @@
   --shadow:0 4px 20px rgba(21,101,192,.15);
   --shadowlg:0 12px 40px rgba(21,101,192,.22);
   --radius:14px; --nav-w:300px; --bar-h:68px;
+  --gn1:#1b4332; --gn2:#2d6a4f; --gn3:#40916c;
+  --gn4:#74c69d; --gn-bg:#f0f7f2; --gn-border:#52b788;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -335,6 +337,142 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);font-w
   .h-divider{margin:0 20px}
   .site-footer{padding:24px 20px}
 }
+
+/* ════════════════════════════════════════
+   NEU: IHRE GANZE GESCHICHTE
+   ════════════════════════════════════════ */
+.geschichte-banner{
+  background:linear-gradient(135deg,var(--gn1) 0%,var(--gn2) 60%,var(--gn3) 100%);
+  padding:56px 48px 44px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.geschichte-banner::after{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.geschichte-banner h2{
+  font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,2.8rem);
+  color:#d8f3dc;font-weight:700;margin-bottom:10px;position:relative;z-index:1;
+}
+.geschichte-banner p{color:#b7e4c7;font-size:.95rem;font-weight:700;position:relative;z-index:1}
+
+.geschichte-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:28px;padding:36px 48px 64px;
+  max-width:1100px;margin:0 auto;align-items:start;
+}
+@media(max-width:720px){.geschichte-grid{grid-template-columns:1fr;padding:20px 16px 48px}}
+
+.g-card-new{
+  background:var(--gn-bg);border:2px solid var(--gn-border);
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 4px 22px rgba(27,67,50,.14);
+  transition:box-shadow .3s,transform .3s;
+}
+.g-card-new:not(.open){cursor:pointer}
+.g-card-new:not(.open):hover{
+  box-shadow:0 14px 44px rgba(27,67,50,.28);transform:translateY(-6px);
+}
+
+.g-card-thumb-new{
+  width:100%;height:205px;object-fit:cover;display:block;
+  background:linear-gradient(135deg,#c8e6c9,#a5d6a7);
+}
+
+.g-card-header-new{
+  background:linear-gradient(135deg,var(--gn1),var(--gn2));
+  padding:16px 52px 16px 20px;position:relative;cursor:pointer;
+  transition:background .2s;
+}
+.g-card-header-new:hover{background:linear-gradient(135deg,#163d2d,#255a42)}
+
+.g-card-title-new{
+  font-family:'Playfair Display',serif;font-size:.94rem;
+  color:#d8f3dc;font-weight:700;line-height:1.4;
+}
+.g-card-title-new small{
+  display:block;font-size:.74rem;opacity:.75;
+  font-family:'Nunito',sans-serif;font-weight:700;margin-top:3px;letter-spacing:.04em;
+}
+
+.g-card-toggle-btn{
+  position:absolute;top:50%;right:14px;transform:translateY(-50%);
+  background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.4);
+  color:#fff;width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;cursor:pointer;transition:background .2s,transform .25s;
+  line-height:1;font-weight:800;font-family:'Nunito',sans-serif;
+}
+.g-card-toggle-btn:hover{background:rgba(255,255,255,.32)}
+
+.g-card-body-new{
+  max-height:0;overflow:hidden;
+  transition:max-height .58s cubic-bezier(.4,0,.2,1);
+}
+.g-card-new.open .g-card-body-new{max-height:900px}
+
+.g-card-text-new{
+  padding:22px 24px 24px;font-size:.88rem;color:#1a3028;
+  line-height:1.88;background:var(--gn-bg);
+  border-top:2px solid rgba(82,183,136,.22);
+}
+@keyframes fadeInText{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.g-card-new.open .g-card-text-new{animation:fadeInText .45s .22s both}
+
+/* ════════════════════════════════════════
+   NEU: SYMBOLE & BEDEUTUNGEN
+   ════════════════════════════════════════ */
+.symbole-banner{
+  background:linear-gradient(135deg,var(--gn1) 0%,var(--gn2) 60%,var(--gn3) 100%);
+  padding:56px 48px 44px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.symbole-banner::after{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.symbole-banner h2{
+  font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,2.8rem);
+  color:#d8f3dc;font-weight:700;margin-bottom:10px;position:relative;z-index:1;
+}
+.symbole-banner p{color:#b7e4c7;font-size:.95rem;font-weight:700;position:relative;z-index:1}
+
+.symbole-section{
+  padding:36px 48px 64px;max-width:1000px;margin:0 auto;display:grid;gap:20px;
+}
+@media(max-width:720px){.symbole-section{padding:20px 16px 48px}}
+
+.sym-box-new{
+  display:flex;gap:24px;align-items:center;
+  background:var(--gn-bg);border:2px solid var(--gn-border);border-radius:14px;
+  padding:20px 24px;box-shadow:0 4px 16px rgba(27,67,50,.1);
+  opacity:0;transform:translateX(-30px);
+  transition:opacity .55s,transform .55s,box-shadow .3s,border-color .3s;
+}
+.sym-box-new.sym-visible{opacity:1;transform:translateX(0)}
+.sym-box-new.sym-visible:hover{
+  box-shadow:0 8px 30px rgba(27,67,50,.22);
+  border-color:var(--gn1);transform:translateX(7px);
+}
+
+.sym-img-new{
+  width:130px;height:96px;object-fit:cover;border-radius:10px;flex-shrink:0;
+  border:2px solid var(--gn4);background:linear-gradient(135deg,#c8e6c9,#a5d6a7);
+}
+
+.sym-content-new{flex:1}
+.sym-title-new{
+  font-family:'Playfair Display',serif;font-size:1.05rem;
+  color:var(--gn1);margin-bottom:8px;font-weight:700;
+}
+.sym-desc-new{font-size:.87rem;color:#2d4a35;line-height:1.78}
+
+@media(max-width:600px){
+  .sym-box-new{flex-direction:column}
+  .sym-img-new{width:100%;height:160px}
+}
 </style>
 </head>
 <body>
@@ -377,6 +515,12 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);font-w
     </div>
     <div class="nav-item" id="nav-quellen" onclick="showPage('quellen');toggleNav()">
       <span class="nav-icon">&#128218;</span> Quellen &amp; Projekt
+    </div>
+    <div class="nav-item" id="nav-geschichte" onclick="showPage('geschichte');toggleNav()">
+      <span class="nav-icon">&#128214;</span> Ihre ganze Geschichte
+    </div>
+    <div class="nav-item" id="nav-symbole" onclick="showPage('symbole');toggleNav()">
+      <span class="nav-icon">&#128269;</span> Symbole &amp; Bedeutungen
     </div>
   </div>
   <div class="nav-footer">Schulprojekt &middot; Fach Religion &middot; 2026</div>
@@ -652,7 +796,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);font-w
       <div class="tl-spine"></div>
       <div class="tl-right">
         <h3 class="tl-event">Aufbruch nach Amerika</h3>
-        <p class="tl-desc">Sie verl&auml;sst das zerst&ouml;rte Nachkriegsdeutschland und wandert nach New York aus. Sie schl&auml;gt sich anfangs als Kindermd&auml;dchen durch.</p>
+        <p class="tl-desc">Sie verl&auml;sst das zerst&ouml;rte Nachkriegsdeutschland und wandert nach New York aus. Sie schl&auml;gt sich anfangs als Kinderm&auml;dchen durch.</p>
       </div>
     </div>
   </div>
@@ -781,6 +925,200 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);font-w
   </footer>
 </div><!-- /quellen -->
 
+
+<!-- ═══════════════ IHRE GANZE GESCHICHTE (NEU) ═══════════════ -->
+<div id="page-geschichte" class="page">
+
+  <div class="geschichte-banner">
+    <h2>Ihre ganze Geschichte</h2>
+    <p>Vier Kapitel eines au&szlig;ergew&ouml;hnlichen Lebens &ndash; klicke auf eine Karte, um mehr zu erfahren</p>
+  </div>
+
+  <div class="geschichte-grid">
+
+    <!-- KARTE 1 -->
+    <div class="g-card-new" id="gcard-0">
+      <img class="g-card-thumb-new" src="Karte1.png" alt="Jugend, Krieg und das Leben als Million&auml;rin">
+      <div class="g-card-header-new" onclick="toggleGCard(0)">
+        <h3 class="g-card-title-new">
+          Jugend, Krieg und das Leben als Million&auml;rin
+          <small>1925 &ndash; 1967</small>
+        </h3>
+        <button class="g-card-toggle-btn" onclick="event.stopPropagation();toggleGCard(0)">&#9660;</button>
+      </div>
+      <div class="g-card-body-new">
+        <div class="g-card-text-new">
+          <p>Sabine Koritke wird am 9.&nbsp;September 1925 in K&ouml;nigsberg geboren. Als der Zweite Weltkrieg ausbricht, flieht sie und &uuml;berlebt im Februar 1945 nur knapp die verheerende Bombennacht in Dresden. Traumatisiert vom Krieg, zieht sie 1949 mit nichts als Mut im Gep&auml;ck zu ihrer Tante nach New York. Sie absolviert eine Ausbildung zur Hotelfachfrau, zieht nach Miami und steigt bis zur Managerin des exklusiven &bdquo;Quarterdeck-Clubs&ldquo; auf. Dort lernt sie Prominente wie Richard Nixon oder Conrad Hilton kennen &ndash; und Clifford Ball, den Sohn eines Multimillion&auml;rs. 1953 heiraten die beiden. Sabine wird Mutter von zwei S&ouml;hnen und taucht ein in ein Leben voller Luxus, Yachten und High-Society-Partys. Doch hinter der gl&auml;nzenden Fassade sp&uuml;rt sie eine unertr&auml;gliche innere Leere. Sie merkt, dass Geld keine Seele heilen kann. Nach zehn Jahren scheitert die Ehe und sie l&auml;sst sich scheiden. Auf der Suche nach echter Wahrheit bricht sie radikal mit der Welt des Reichtums.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- KARTE 2 -->
+    <div class="g-card-new" id="gcard-1">
+      <img class="g-card-thumb-new" src="Karte2.png" alt="Hippie-Mutter, Sinnsuche und das Lord&apos;s Land">
+      <div class="g-card-header-new" onclick="toggleGCard(1)">
+        <h3 class="g-card-title-new">
+          Hippie-Mutter, Sinnsuche und das &bdquo;Lord&rsquo;s Land&ldquo;
+          <small>1968 &ndash; 1992</small>
+        </h3>
+        <button class="g-card-toggle-btn" onclick="event.stopPropagation();toggleGCard(1)">&#9660;</button>
+      </div>
+      <div class="g-card-body-new">
+        <div class="g-card-text-new">
+          <p>Geleitet von der Sehnsucht nach echter Gemeinschaft zieht Sabine Ball an die US-Westk&uuml;ste. Fasziniert von der Flower-Power-Bewegung kauft sie 1968 ein 150&nbsp;Hektar gro&szlig;es Grundst&uuml;ck an der K&uuml;ste von Mendocino in Nordkalifornien. Sie verkauft ihr Haus und ihren Schmuck, um dort eine Hippie-Kommune f&uuml;r gestrandete und drogenabh&auml;ngige Jugendliche aufzubauen. Doch auch hier bleibt sie Suchende: Eine dreimonatige spirituelle Reise nach Indien und Nepal, inklusive der strikten Meditation in einem tibetischen Kloster in Kathmandu, bringt ihr nicht den ersehnten inneren Frieden. Die radikale Wende folgt 1971: Durch die amerikanische &bdquo;Jesus-People&ldquo;-Bewegung erlebt sie eine tiefgreifende Bekehrung zum christlichen Glauben. Ihre Kommune wandelt sich zur christlichen Lebensgemeinschaft &bdquo;The Lord&rsquo;s Land&ldquo;. &Uuml;ber zwei Jahrzehnte hinweg schenkt sie dort Ausgesto&szlig;enen bedingungslose Liebe, Struktur und ein Zuhause. Ende der 1980er-Jahre reist sie durch das geteilte Deutschland. Die Bilder der maroden DDR-St&auml;dte ber&uuml;hren sie so tief, dass sie nach dem Mauerfall sp&uuml;rt: Ihre gr&ouml;&szlig;te Aufgabe wartet in der alten Heimat.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- KARTE 3 -->
+    <div class="g-card-new" id="gcard-2">
+      <img class="g-card-thumb-new" src="Karte3.png" alt="R&uuml;ckkehr in die Heimat und Geburtsstunde des Stoffwechsel">
+      <div class="g-card-header-new" onclick="toggleGCard(2)">
+        <h3 class="g-card-title-new">
+          R&uuml;ckkehr in die Heimat und die Geburtsstunde des &bdquo;Stoffwechsel&ldquo;
+          <small>1993 &ndash; 2000</small>
+        </h3>
+        <button class="g-card-toggle-btn" onclick="event.stopPropagation();toggleGCard(2)">&#9660;</button>
+      </div>
+      <div class="g-card-body-new">
+        <div class="g-card-text-new">
+          <p>Im Jahr 1993 kehrt Sabine Ball im Alter von fast 70&nbsp;Jahren dauerhaft nach Dresden zur&uuml;ck &ndash; im Gep&auml;ck hat sie kaum finanzielle Mittel, aber eine unersch&uuml;tterliche Vision. Schockiert von der extremen Armut, der Gewalt und den Drogenproblemen unter den Stra&szlig;enkindern im Plattenbaugebiet Gorbitz und der Neustadt, fackelt sie nicht lange. Sie mietet R&auml;umlichkeiten und er&ouml;ffnet ein kleines missionarisches Caf&eacute; als sicheren Zufluchtsort. Daraus entsteht im selben Jahr der Verein &bdquo;Stoffwechsel&ldquo;&nbsp;e.V. Sabine Ball versorgt die Jugendlichen nicht nur mit Essen, Kleidung und einem offenen Ohr, sondern gr&uuml;ndet auch einen Second-Hand-Laden und betreute Wohngemeinschaften. Sie verzichtet konsequent auf jeden pers&ouml;nlichen Komfort, lebt selbst extrem bescheiden und steckt jeden Cent sowie jede Spende in die Jugendhilfe. Die Presse tauft sie bald bewundernd die &bdquo;Mutter Teresa von Dresden&ldquo;. 1996 will ihr der s&auml;chsische Ministerpr&auml;sident Kurt Biedenkopf das Bundesverdienstkreuz verleihen. Sie lehnt die Ehrung dem&uuml;tig ab: Sie wolle den Ruhm nicht f&uuml;r sich, zudem w&uuml;rden die Stra&szlig;enkinder eine solche Auszeichnung &uuml;berhaupt nicht verstehen.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- KARTE 4 -->
+    <div class="g-card-new" id="gcard-3">
+      <img class="g-card-thumb-new" src="Karte4.png" alt="Sp&auml;tes Wirken, Heimgang und Erbe">
+      <div class="g-card-header-new" onclick="toggleGCard(3)">
+        <h3 class="g-card-title-new">
+          Sp&auml;tes Wirken, der Heimgang und ein lebendiges Erbe
+          <small>2001 &ndash; 2009</small>
+        </h3>
+        <button class="g-card-toggle-btn" onclick="event.stopPropagation();toggleGCard(3)">&#9660;</button>
+      </div>
+      <div class="g-card-body-new">
+        <div class="g-card-text-new">
+          <p>Auch im hohen Alter denkt Sabine Ball nicht an den Ruhestand. Sie reist unerm&uuml;dlich durch ganz Deutschland, spricht in Talkshows, Schulen, Frauenfr&uuml;hst&uuml;cken und sogar in Gef&auml;ngnissen, um von der ver&auml;ndernden Kraft Gottes zu erz&auml;hlen. Ihr Leben wird in B&uuml;chern und Filmen dokumentiert, wodurch sie Tausende Menschen inspiriert. Im Jahr 2005 &uuml;bergibt sie die offizielle Leitung des Vereins an den Mitgr&uuml;nder Ralf Knauthe. Sie bleibt jedoch bis zu ihrem letzten Tag das emotionale und geistige Herz des Projekts. Am 7.&nbsp;Juli 2009 stirbt Sabine Ball im Alter von 83&nbsp;Jahren v&ouml;llig unerwartet in Dresden an den Folgen eines Herzinfarkts. Wenn sie zu Lebzeiten B&uuml;cher signierte, schrieb sie stets den Satz dazu: &bdquo;Gott ist Liebe&ldquo;. Ihr physisches Leben ist vorbei, doch ihr Erbe ist lebendiger denn je: Der Stoffwechsel&nbsp;e.V. arbeitet bis heute erfolgreich weiter, expandiert in verschiedene Stadtteile Dresdens und f&auml;ngt t&auml;glich hunderte Kinder und Jugendliche auf. Sabine Ball hinterlie&szlig; der Welt den praktischen Beweis, dass ein einzelner Mensch durch gelebten Glauben die Welt ver&auml;ndern kann.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /geschichte-grid -->
+
+  <footer class="site-footer">
+    <strong>Quellen:</strong> Ball / Werner (Brunnen Verlag) &middot; Infotext-&Uuml;bersicht (Schulprojekt) &middot; lovetransforms.de &middot; stoffwechsel.org
+  </footer>
+</div><!-- /geschichte -->
+
+
+<!-- ═══════════════ SYMBOLE & BEDEUTUNGEN (NEU) ═══════════════ -->
+<div id="page-symbole" class="page">
+
+  <div class="symbole-banner">
+    <h2>Symbole &amp; Bedeutungen</h2>
+    <p>Legende der Ausstellungsst&uuml;cke &ndash; alle Symbole und ihre Erkl&auml;rungen</p>
+  </div>
+
+  <div class="symbole-section">
+
+    <!-- Symbol 1 -->
+    <div class="sym-box-new">
+      <img class="sym-img-new" src="Symbol1.png" alt="Tisch mit Alkohol">
+      <div class="sym-content-new">
+        <h4 class="sym-title-new">&#127862; Tisch mit Alkohol</h4>
+        <p class="sym-desc-new">Der Ehemann entwickelte eine Alkoholabh&auml;ngigkeit; aufgrund dessen lie&szlig; sich Sabine Ball von ihm scheiden.</p>
+      </div>
+    </div>
+
+    <!-- Symbol 2 -->
+    <div class="sym-box-new">
+      <img class="sym-img-new" src="Symbol2.png" alt="The Lord&apos;s Land &ndash; Grundst&uuml;ck">
+      <div class="sym-content-new">
+        <h4 class="sym-title-new">&#127807; The Lord&rsquo;s Land &ndash; R&uuml;ckzugsort</h4>
+        <p class="sym-desc-new">Nach ihrer Scheidung kaufte Sabine Ball &bdquo;The Lord&rsquo;s Land&ldquo;, um Kindern und Jugendlichen einen gesch&uuml;tzten Ort zu bieten und ihnen zu helfen, sich von Alkohol und Drogen fernzuhalten.</p>
+      </div>
+    </div>
+
+    <!-- Symbol 3 -->
+    <div class="sym-box-new">
+      <img class="sym-img-new" src="Symbol3.png" alt="The Lord&apos;s Land &ndash; Schild">
+      <div class="sym-content-new">
+        <h4 class="sym-title-new">&#128652; The Lord&rsquo;s Land &ndash; Ortsschild</h4>
+        <p class="sym-desc-new">Markiert den Ort und macht &bdquo;The Lord&rsquo;s Land&ldquo; als Hilfsprojekt von Sabine Ball bekannt.</p>
+      </div>
+    </div>
+
+    <!-- Symbol 4 -->
+    <div class="sym-box-new">
+      <img class="sym-img-new" src="Symbol4.png" alt="Grabstein von Sabine Ball">
+      <div class="sym-content-new">
+        <h4 class="sym-title-new">&#129464; Grabstein von Sabine Ball</h4>
+        <p class="sym-desc-new">Sabine Ball wurde am 9.&nbsp;September 1925 in K&ouml;nigsberg geboren und starb am 7.&nbsp;Juli 2009 in Dresden. Der Grabstein erinnert an ihr Leben und ihr soziales Engagement f&uuml;r Kinder und Jugendliche.</p>
+      </div>
+    </div>
+
+    <!-- Symbol 5 -->
+    <div class="sym-box-new">
+      <img class="sym-img-new" src="Symbol5.png" alt="Boeing B-17 Flying Fortress">
+      <div class="sym-content-new">
+        <h4 class="sym-title-new">&#9992; Boeing B-17 Flying Fortress</h4>
+        <p class="sym-desc-new">Bomberflugzeug, das bei den Luftangriffen auf Dresden im Februar 1945 eingesetzt wurde und zur Zerst&ouml;rung gro&szlig;er Teile der Stadt beitrug.</p>
+      </div>
+    </div>
+
+    <!-- Symbol 6 -->
+    <div class="sym-box-new">
+      <img class="sym-img-new" src="Symbol6.png" alt="Bomben der Luftangriffe">
+      <div class="sym-content-new">
+        <h4 class="sym-title-new">&#128163; Bomben der Luftangriffe</h4>
+        <p class="sym-desc-new"><strong>Sprengbomben</strong> wurden eingesetzt, um Geb&auml;ude, Stra&szlig;en und Infrastruktur zu zerst&ouml;ren. <strong>Brandbomben</strong> verursachten zahlreiche Br&auml;nde, die sich zu gro&szlig;en Feuersturmen ausbreiteten. <strong>Luftminen</strong> &ndash; sehr gro&szlig;e Bomben, deren Druckwelle D&auml;cher, Fenster und ganze Geb&auml;ude schwer besch&auml;digte oder zerst&ouml;rte.</p>
+      </div>
+    </div>
+
+    <!-- Symbol 7 -->
+    <div class="sym-box-new">
+      <img class="sym-img-new" src="Symbol7.png" alt="Dresden">
+      <div class="sym-content-new">
+        <h4 class="sym-title-new">&#127963; Dresden</h4>
+        <p class="sym-desc-new">Die Stadt wurde bei den Luftangriffen im Februar 1945 schwer zerst&ouml;rt. Sabine Ball &uuml;berlebte die Bombardierung und erlebte die Folgen der Zerst&ouml;rung hautnah.</p>
+      </div>
+    </div>
+
+    <!-- Symbol 8 -->
+    <div class="sym-box-new">
+      <img class="sym-img-new" src="Symbol8.png" alt="Rosen">
+      <div class="sym-content-new">
+        <h4 class="sym-title-new">&#127801; Rosen</h4>
+        <p class="sym-desc-new">Stehen f&uuml;r Liebe, Familie und die gl&uuml;cklichen Jahre, die Sabine Ball mit ihrem Mann und ihren Kindern verbrachte.</p>
+      </div>
+    </div>
+
+    <!-- Symbol 9 -->
+    <div class="sym-box-new">
+      <img class="sym-img-new" src="Symbol9.png" alt="Ringe">
+      <div class="sym-content-new">
+        <h4 class="sym-title-new">&#128141; Ringe</h4>
+        <p class="sym-desc-new">Stehen f&uuml;r die zehnj&auml;hrige Ehe von Sabine Ball und den Beginn ihres wohlhabenden Lebens als Million&auml;rsgattin.</p>
+      </div>
+    </div>
+
+    <!-- Symbol 10 -->
+    <div class="sym-box-new">
+      <img class="sym-img-new" src="Symbol10.png" alt="Caf&eacute; Stoffwechsel">
+      <div class="sym-content-new">
+        <h4 class="sym-title-new">&#127968; Caf&eacute; Stoffwechsel / Stoffwechsel&nbsp;e.&nbsp;V.</h4>
+        <p class="sym-desc-new">Sabine Ball gr&uuml;ndete 1993 den Verein Stoffwechsel&nbsp;e.&nbsp;V. in einem ehemaligen Schnapsladen. Dort entstand das Caf&eacute; Stoffwechsel als Treffpunkt f&uuml;r Kinder und Jugendliche. Der Verein besteht bis heute und unterst&uuml;tzt Kinder, Jugendliche und Familien mit verschiedenen sozialen Angeboten.</p>
+      </div>
+    </div>
+
+  </div><!-- /symbole-section -->
+
+  <footer class="site-footer">
+    <strong>Quellen:</strong> Legende der Ausstellung (Schulprojekt) &middot; Stoffwechsel&nbsp;e.V. Dresden &middot; Sabine Ball Stiftung
+  </footer>
+</div><!-- /symbole -->
+
 </main>
 
 <!-- LIGHTBOX -->
@@ -829,6 +1167,7 @@ function showPage(name){
   window.scrollTo(0,0);
   setTimeout(()=>{
     document.querySelectorAll('#page-'+name+' .reveal').forEach(s=>observer.observe(s));
+    if(name==='symbole') initSymboleAnim();
   },50);
 }
 
@@ -866,6 +1205,38 @@ document.addEventListener('keydown',e=>{
     if(document.getElementById('sidenav').classList.contains('open')) toggleNav();
   }
 });
+
+/* ─ GESCHICHTE KARTEN ─ */
+function toggleGCard(idx){
+  const card=document.getElementById('gcard-'+idx);
+  const btn=card.querySelector('.g-card-toggle-btn');
+  const isOpen=card.classList.contains('open');
+  if(isOpen){
+    card.classList.remove('open');
+    btn.innerHTML='&#9660;';
+  } else {
+    card.classList.add('open');
+    btn.innerHTML='&#10005;';
+  }
+}
+
+/* ─ SYMBOLE ANIMATION ─ */
+function initSymboleAnim(){
+  const boxes=document.querySelectorAll('#page-symbole .sym-box-new');
+  const already=Array.from(boxes).every(b=>b.classList.contains('sym-visible'));
+  if(already) return;
+  const symObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('sym-visible');symObs.unobserve(e.target);}
+    });
+  },{threshold:0.06});
+  boxes.forEach((box,i)=>{
+    box.style.transitionDelay=(i*65)+'ms';
+    symObs.observe(box);
+  });
+  const totalDelay=(boxes.length*65)+600;
+  setTimeout(()=>boxes.forEach(b=>b.style.transitionDelay='0ms'),totalDelay);
+}
 </script>
 </body>
 </html>
